@@ -1,0 +1,53 @@
+1.确认以下编译器已安装：
+
+gcc –version
+
+g++ –version
+
+Python –version
+
+建议去官方网站下载最新版本：http://www.open-mpi.org
+2.下载（默认至当前用户的Downloads目录下）
+
+URL: http://www.open-mpi.org/software/ompi/v1.6/
+
+目前版本：openmpi-1.6.5.tar.gz
+
+3.解压openMPI安装文件，放在当前用户目录下：
+
+tar zxvf openmpi-1.6.5.tar.gz
+
+4.进入安装文件目录
+
+cd openmpi-1.7.5
+
+5.安装openMPI（默认至目录：/usr/local/lib）：
+
+./configure --prefix="/usr/local/openmpi"
+
+注意最后一行是将其安装到 /usr/local/openmpi目录下，可以指定为其他目录，如，用户目录下。
+
+
+6.安装所有需要的文件：
+
+sudo make all install
+
+7.添加库共享路径：
+
+sudo gedit /etc/profile
+
+在profile文件的最后加上一行：
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi
+
+8.使该配置文件生效：
+
+source /etc/profile
+
+9.进行测试：
+
+cd openmpi-1.6.5/examples
+
+make
+
+mpirun -np 4 hello_c

@@ -1,0 +1,57 @@
+/home/user/Desktop/cuda75/cuda/lib64
+
+gedit ~/.bashrc
+source ~/.bashrc
+gedit ~/.bash_profile
+
+gedit /etc/profile
+
+
+gedit /etc/ld.so.conf
+
+ldconfig
+
+
+export PATH=/usr/local/cuda-8.0/bin:$PATH
+export LD_LIBRARY_PAT程的呢？单应性矩阵有8个独立元素：H = h00 h01 h02      手动计算前两行元素与函数输出结H=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH
+
+export PATH=/usr/local/cuda-8.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/home/user/cudnnv4/lib64:/home/user/cudnnv5/lib64:$LD_LIBRARY_PATH
+
+sudo sh -c 'echo "export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/home/user/cudnnv4/lib64:/home/user/cudnnv5/lib64:$LD_LIBRARY_PATH" > ~/.bashrc'
+sudo sh -c 'echo "export PATH=/usr/local/cuda-8.0/bin:$PATH" > ~/.bashrc'
+下面总结一下有关apt-get的常用但容易混淆的指令:
+apt-get autoclean:
+
+    如果你的硬盘空间不大的话，可以定期运行这个程序，将已经删除了的软件包的.deb安装文件从硬盘中删除掉。如果你仍然需要硬盘空间的话，可以试试apt-get clean，这会把你已安装的软件包的安装包也删除掉，当然多数情况下这些包没什么用了，因此这是个为硬盘腾地方的好办法。
+
+
+apt-get clean:
+
+    类似上面的命令，但它删除包缓存中的所有包。这是个很好的做法，因为多数情况下这些包没有用了。但如果你是拨号上网的话，就得重新考虑了。
+
+
+apt-get autoremove:
+
+    删除为了满足其他软件包的依赖而安装的，但现在不再需要的软件包。
+
+
+其它：
+apt-get remove 软件包名称：
+
+    删除已安装的软件包（保留配置文件）。
+apt-get --purge remove 软件包名称：
+
+     删除已安装包（不保留配置文件)。
+
+cp -r tsncaffe /home/zjg
+
+
+卸载opencv
+sudo apt-get autoremove opencv-doc opencv-data libopencv-dev libopencv2.4-java libopencv2.4-jni python-opencv libopencv-core2.4 libopencv-gpu2.4 libopencv-ts2.4 libopencv-photo2.4 libopencv-contrib2.4 libopencv-imgproc2.4 libopencv-superres2.4 libopencv-stitching2.4 libopencv-ocl2.4 libopencv-legacy2.4 libopencv-ml2.4 libopencv-video2.4 libopencv-videostab2.4 libopencv-objdetect2.4 libopencv-calib3d2.4 
+
+
+
+find / -name 'opencv*' | xargs rm -rf
+
+/usr/local/lib/openmpi
