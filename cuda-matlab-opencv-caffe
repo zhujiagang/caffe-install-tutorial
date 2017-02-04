@@ -1,0 +1,93 @@
+#cuda8.0安装
+echo "Installing cuda 8.0"
+sudo sh cuda_8.0.27_linux.run
+
+sudo apt-get -y upgrade
+sudo apt-get -y update
+sudo apt-get -y install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
+
+export PATH=/opt/matlab/toolbox/vision/builtins/src/ocvcg/opencv/include/:$PATH
+
+
+
+echo "export PATH=/usr/local/cuda-8.0/bin:$PATH" >> /etc/profile  
+echo "export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH" >> /etc/profile  
+source /etc/profile
+
+nvidia-smi 
+nvcc --version
+cd /home/user/NVIDIA_CUDA-8.0_Samples
+make -j16
+
+cd /home/
+tar -zxvf cudnn-8.0-linux-x64-v5.0-ga.tgz
+chmod 777 -R cuda
+mv cuda cudnnv5
+
+tar -zxvf cudnn-7.0-linux-x64-v4.0-rc.tgz
+chmod 777 -R cuda
+mv cuda cudnnv4
+
+echo "export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/home/user/cudnnv4/lib64:/home/user/cudnnv5/lib64:$LD_LIBRARY_PATH" >> /etc/profile  
+source /etc/profile
+
+echo "Installing Matlab 2014a"
+sudo mkdir /media/matlab
+cd /home/matlabforlinux
+mount -o loop MATHWORKS_R2014A.iso /media/matlab
+cd /media/matlab
+sudo ./install
+sudo cp libmwservices.so /usr/local/MATLAB/R2014a/bin/glnxa64/ 
+
+#1) 安装依赖项
+sudo apt-get update
+sudo apt-get -y install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+sudo apt-get -y install --no-install-recommends libboost-all-dev
+#2) BLAS安装
+sudo apt-get -y install libatlas-base-dev
+#3) 安装pycaffe接口所需要的依赖项
+sudo apt-get -y install python-numpy python-scipy python-matplotlib python-sklearn python-skimage python-h5py python-protobuf python-leveldb python-networkx python-nose python-pandas python-gflags cython ipython
+#4) 继续安装依赖项
+sudo apt-get -y  install libgflags-dev libgoogle-glog-dev liblmdb-dev
+#5) 安装opencv
+echo "Installing OpenCV 2.4.10"
+echo "Removing any pre-installed ffmpeg and x264"
+sudo apt-get -y remove ffmpeg x264 libx264-dev
+echo "Installing Dependenices"
+sudo apt-get -y install libopencv-dev
+sudo apt-get -y install build-essential checkinstall cmake pkg-config yasm
+sudo apt-get -y install libtiff4-dev libjpeg-dev libjasper-dev
+sudo apt-get -y install libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev
+sudo apt-get -y install python-dev python-numpy
+sudo apt-get -y install libtbb-dev
+sudo apt-get -y install libqt4-dev libgtk2.0-dev
+sudo apt-get -y install libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev
+sudo apt-get -y install x264 v4l-utils ffmpeg
+sudo apt-get -y install libgtk2.0-dev
+cd /home/user/opencv-2.4/opencv-2.4.10
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D CUDA_GENERATION=Auto -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
+make -j16
+sudo make install
+sudo sh -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
+echo "OpenCV 2.4.10 ready to be used"
+
+#6) 安装caffe
+echo "Installing caffe"
+cd /home/caffe
+rm -rf build
+mkdir build
+make clean  #把之前编译的去掉
+make all -j16
+make test -j16
+export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/home/user/cudnnv4/lib64:/home/user/cudnnv5/lib64:$LD_LIBRARY_PATH
+make runtest -j16
+make pycaffe -j16
+make matcaffe -j16
+#1. 数据预处理
+sh data/mnist/get_mnist.sh
+#2. 重建lmdb文件。Caffe支持多种数据格式输入网络，包括Image(.jpg, .png等)，leveldb，lmdb，HDF5等，根据自己需要选择不同输入吧。
+sh examples/mnist/create_mnist.sh
+sh examples/mnist/train_lenet.sh
