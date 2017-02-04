@@ -77,9 +77,9 @@ sudo .run -silent -driver
 Logfile is /tmp/cuda_install_2961.log
 安装完成，但是缺少一些库。
 2)安装所缺少的库
-sudo apt-get upgrade
+sudo apt-get upgrade -y
 sudo apt-get update
-sudo apt-get install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev
+sudo apt-get install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev -y
 3) 设置环境变量
 在终端输入这两句：
 export PATH=/usr/local/cuda-8.0/bin:$PATH
@@ -158,14 +158,14 @@ sudo cp libmwservices.so /usr/local/MATLAB/R2014a/bin/glnxa64/
 这里是跟着官网教程来的
 1) 安装依赖项
 sudo apt-get update
-sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
-sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler -y
+sudo apt-get install --no-install-recommends libboost-all-dev -y
 2) BLAS安装
 sudo apt-get install libatlas-base-dev
 3) 安装pycaffe接口所需要的依赖项
 sudo apt-get install -y python-numpy python-scipy python-matplotlib python-sklearn python-skimage python-h5py python-protobuf python-leveldb python-networkx python-nose python-pandas python-gflags cython ipython
 4) 继续安装依赖项
-sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev -y
 5)opencv3.0安装
 参照http://ouxinyu.github.io/Blogs/20151108001.html
 （1）http://pan.baidu.com/s/1qX1uFHa 密码:wysa 
