@@ -29,3 +29,13 @@ sudo apt-get -y install gfortran swig
 
 # swig 在 import python 时很重要
 
+echo "Installing libpng"
+wget http://prdownloads.sourceforge.net/libpng/libpng-1.5.4.tar.gz
+tar xzf libpng-1.5.4.tar.gz
+cd libpng-1.5.4
+./configure --prefix=/usr/local/libpng
+make
+make install
+
+
+
