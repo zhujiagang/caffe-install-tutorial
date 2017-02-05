@@ -38,11 +38,11 @@ apt-get autoremove:
 
 其它：
 apt-get remove 软件包名称：
+删除已安装的软件包（保留配置文件）。
 
-    删除已安装的软件包（保留配置文件）。
+
 apt-get --purge remove 软件包名称：
-
-     删除已安装包（不保留配置文件)。
+删除已安装包（不保留配置文件)。
 
 cp -r tsncaffe /home/zjg
 
