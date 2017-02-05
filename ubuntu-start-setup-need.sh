@@ -27,3 +27,5 @@ sudo apt-get -y install x264 v4l-utils ffmpeg
 sudo apt-get -y install libgtk2.0-dev
 sudo apt-get -y install gfortran swig
 
+# swig 在 import python 时很重要
+
