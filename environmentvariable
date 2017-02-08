@@ -55,3 +55,9 @@ sudo apt-get autoremove opencv-doc opencv-data libopencv-dev libopencv2.4-java l
 find / -name 'opencv*' | xargs rm -rf
 
 /usr/local/lib/openmpi
+
+jupyter notebook 安装链接:
+http://blog.sina.com.cn/s/blog_76923bd80102wb45.html
+
+远程访问 jupyter notebook:
+http://blog.leanote.com/post/jevonswang/%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEjupyter-notebook
