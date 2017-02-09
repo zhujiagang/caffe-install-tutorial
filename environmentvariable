@@ -65,3 +65,6 @@ http://blog.csdn.net/u013473520/article/details/50696771
 
 caffe imagenet
 http://caffe.berkeleyvision.org/gathered/examples/imagenet.html
+
+cutorch cunn setup reference link:
+# http://www.cnblogs.com/darkknightzh/p/6030232.html
