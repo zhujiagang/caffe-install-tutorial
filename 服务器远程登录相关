@@ -1,0 +1,51 @@
+1.添加账户，增加ssh
+sudo apt-get update
+sudo apt-get install openssh-server
+查看ssh服务是否启动
+打开"终端窗口"，输入"sudo ps -e |grep ssh"-->回车-->有sshd,说明ssh服务已经启动，如果没有启动，输入"sudo service ssh start"-->回车-->ssh服务就会启动。
+sudo gedit /etc/ssh/sshd_config
+"-->回车-->把配置文件中的"PermitRootLogin without-password"加一个"#"号,把它注释掉-->再增加一句"PermitRootLogin yes"-->保存，修改成功。
+2.xxx is not in the sudoers file.This incident will be reported.的解决方法 
+1.切换到root用户下
+2.添加sudo文件的写权限,命令是:
+chmod u+w /etc/sudoers
+3.编辑sudoers文件
+sudo gedit /etc/sudoers
+找到这行 root ALL=(ALL) ALL,在他下面添加xxx ALL=(ALL) ALL (这里的xxx是你的用户名)
+ps:这里说下你可以sudoers添加下面四行中任意一条
+youuser            ALL=(ALL)                ALL
+%youuser           ALL=(ALL)                ALL
+youuser            ALL=(ALL)                NOPASSWD: ALL
+%youuser           ALL=(ALL)                NOPASSWD: ALL
+第一行:允许用户youuser执行sudo命令(需要输入密码).
+第二行:允许用户组youuser里面的用户执行sudo命令(需要输入密码).
+第三行:允许用户youuser执行sudo命令,并且在执行的时候不输入密码.
+第四行:允许用户组youuser里面的用户执行sudo命令,并且在执行的时候不输入密码.
+4.撤销sudoers文件写权限,命令:
+chmod u-w /etc/sudoers
+这样普通用户就可以使用sudo了.
+3.远程显示，sublime下载
+
+sudo gedit /etc/ssh/ssh_config
+
+ForwardAgent yes
+FrowardX11 yes
+ForwardX11Trusted yes
+
+sudo gedit /etc/ssh/sshd_config
+X11Forwarding yes
+
+
+
+1: 增加一个用户
+sudo useradd -mk /home/zjg -s /bin/bash zjg
+为zxp用户添加密码：
+sudo passwd zjg
+2: 删除一个用户：
+userdel swift
+3: 设置ROOT密码方法：
+sudo passwd root, 然后输入密码即可！//此方法仅针对root密码尚未设置的情况下
+修改root密码的方法：sudo passwd root
+进入root状态命令 ：su root 然后输入你设置好的密码就OK了
+修改普通用户密码方法：passwd username
+

@@ -1,0 +1,12 @@
+ Ctrl+Alt+F1进入纯文本界面
+?sudo killall Xorg
+sudo service lightdm stop
+进入显卡驱动安装文件目录：Desktop/cudasetupfile
+卸载驱动
+sh ./NVIDIA-Linux-x86_64-367.27.run -uninstall 
+ sudo service lightdm start
+ sudo service lightdm stop
+重新安装驱动
+sh ./NVIDIA-Linux-x86_64-367.27.run 
+ sudo service lightdm start
+

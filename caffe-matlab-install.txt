@@ -166,6 +166,10 @@ sudo apt-get install libatlas-base-dev -y
 sudo apt-get install -y python-numpy python-scipy python-matplotlib python-sklearn python-skimage python-h5py python-protobuf python-leveldb python-networkx python-nose python-pandas python-gflags cython ipython
 4) 继续安装依赖项
 sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev -y
+sudo apt-get install python-pydot --force-yes 
+cd python
+for req in $(cat requirements.txt); do pip install $req; done
+
 5)opencv3.0安装
 参照http://ouxinyu.github.io/Blogs/20151108001.html
 （1）http://pan.baidu.com/s/1qX1uFHa 密码:wysa 
