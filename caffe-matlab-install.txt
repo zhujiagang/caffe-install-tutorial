@@ -182,6 +182,8 @@ google之后发现,但是有个同学已经对其进行修改。
 请参考：https://github.com/opencv/opencv/pull/6510/commits/10896129b39655e19e4e7c529153cb5c2191a1db 
 cd  /home/zhou/opencv3.0/OpenCV/opencv-3.0.0/modules/cudalegacy/src
 sudo gedit graphcuts.cpp
+|| (CUDART_VERSION >= 8000)
+
 进行修改        
 然后保存并退出。
 sudo sh opencv3_0_0.sh
