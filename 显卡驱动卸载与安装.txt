@@ -1,12 +1,17 @@
- Ctrl+Alt+F1½øÈë´¿ÎÄ±¾½çÃæ
+ Ctrl+Alt+F1è¿›å…¥çº¯æ–‡æœ¬ç•Œé¢
 ?sudo killall Xorg
 sudo service lightdm stop
-½øÈëÏÔ¿¨Çı¶¯°²×°ÎÄ¼şÄ¿Â¼£ºDesktop/cudasetupfile
-Ğ¶ÔØÇı¶¯
+è¿›å…¥æ˜¾å¡é©±åŠ¨å®‰è£…æ–‡ä»¶ç›®å½•ï¼šDesktop/cudasetupfile
+å¸è½½é©±åŠ¨
 sh ./NVIDIA-Linux-x86_64-367.27.run -uninstall 
+
+sudo chmod a+x NVIDIA-Linux-x86_64-367.44.run  //è·å–æƒé™
+sudo ./NVIDIA-Linux-x86_64-367.44.run  //å®‰è£…é©±åŠ¨
+
+
  sudo service lightdm start
  sudo service lightdm stop
-ÖØĞÂ°²×°Çı¶¯
+é‡æ–°å®‰è£…é©±åŠ¨
 sh ./NVIDIA-Linux-x86_64-367.27.run 
  sudo service lightdm start
 
