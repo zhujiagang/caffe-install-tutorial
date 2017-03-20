@@ -1,24 +1,7 @@
-#!/usr/bin/env bash
-
-######################################################################
-# Torch install
-######################################################################
-
-
-TOPDIR=$PWD
 rm -rf /home/user/torch
 # Prefix:
 PREFIX=/home/user/torch/install
 echo "Installing Torch into: $PREFIX"
-
-if [[ `uname` != 'Linux' ]]; then
-  echo 'Platform unsupported, only available for Linux'
-  exit
-fi
-if [[ `which apt-get` == '' ]]; then
-    echo 'apt-get not found, platform not supported'
-    exit
-fi
 
 # Install dependencies for Torch:
 sudo apt-get update
@@ -79,37 +62,3 @@ $PREFIX/bin/luarocks install /home/user/Downloads/cutorch/rocks/cutorch-1.0-0.ro
 #[ -n "$cunn" ] && \
 #($PREFIX/bin/luarocks install cunn)
 $PREFIX/bin/luarocks install /home/user/Downloads/cunn/rocks/cunn-1.0-0.rockspec
-
-
-$PREFIX/bin/luarocks install luafilesystem
-$PREFIX/bin/luarocks install penlight
-$PREFIX/bin/luarocks install sys
-$PREFIX/bin/luarocks install xlua
-$PREFIX/bin/luarocks install image
-$PREFIX/bin/luarocks install env
-$PREFIX/bin/luarocks install qtlua
-$PREFIX/bin/luarocks install qttorch
-
-sudo apt-get install gnuplot -y
-sudo apt-get install gnuplot-qt -y
-echo ""
-echo "=> Torch7 has been installed successfully"
-echo ""
-
-
-echo "Installing nngraph ... "
-$PREFIX/bin/luarocks install nngraph
-RET=$?; if [ $RET -ne 0 ]; then echo "Error. Exiting."; exit $RET; fi
-echo "nngraph installation completed"
-
-
-echo "Installing Lua-GD ... "
-mkdir $PREFIX/src
-cd $PREFIX/src
-rm -rf lua-gd
-git clone https://github.com/ittner/lua-gd.git
-cd lua-gd
-sed -i "s/LUABIN=lua5.1/LUABIN=..\/..\/bin\/luajit/" Makefile
-$PREFIX/bin/luarocks make
-RET=$?; if [ $RET -ne 0 ]; then echo "Error. Exiting."; exit $RET; fi
-echo "Lua-GD installation completed"

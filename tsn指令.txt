@@ -1,0 +1,35 @@
+############hmdb51 split1
+
+python tools/eval_net.py hmdb51 1 rgb /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_rgb_deploy.prototxt models/hmdb51_split_1_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_rgb_score.npz
+
+python tools/eval_net.py hmdb51 1 flow /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_flow_deploy.prototxt models/hmdb51_split_1_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_rgb_score.npz /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_flow_score.npz --score_weights 1 1.5
+
+############hmdb51 split2
+
+python tools/eval_net.py hmdb51 2 rgb /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_rgb_deploy.prototxt models/hmdb51_split_2_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_rgb_score.npz
+
+python tools/eval_net.py hmdb51 2 flow /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_flow_deploy.prototxt models/hmdb51_split_2_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_rgb_score.npz /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_flow_score.npz --score_weights 1 1.5
+
+############hmdb51 split3
+
+python tools/eval_net.py hmdb51 3 rgb /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_rgb_deploy.prototxt models/hmdb51_split_3_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_rgb_score.npz
+
+python tools/eval_net.py hmdb51 3 flow /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_flow_deploy.prototxt models/hmdb51_split_3_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_rgb_score.npz /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_flow_score.npz --score_weights 1 1.5

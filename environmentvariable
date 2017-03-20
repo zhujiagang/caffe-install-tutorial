@@ -88,3 +88,51 @@ http://www.linuxidc.com/Linux/2008-10/16473.htm
 
 vim使用说明
 http://www.cnblogs.com/softwaretesting/archive/2011/07/12/2104435.html
+
+
+ImportError: libavcodec.so.56: cannot open shared object file: No such file or directory
+
+# ldd `which ffmpeg`
+    linux-vdso.so.1 =>  (0x00007fffb32d8000)
+    libavdevice.so.56 => not found
+    libavfilter.so.5 => not found
+    libavformat.so.56 => not found
+    libavcodec.so.56 => not found
+    libpostproc.so.53 => not found
+    libswresample.so.1 => not found
+    libswscale.so.3 => not found
+    libavutil.so.54 => not found
+    libpthread.so.0 => /lib64/libpthread.so.0 (0x00007f75f2ef8000)
+    libm.so.6 => /lib64/libm.so.6 (0x00007f75f2c74000)
+    libc.so.6 => /lib64/libc.so.6 (0x00007f75f28df000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007f75f3126000)
+
+Solution:
+
+Now, check the library path, open ld.so.conf
+
+# vim /etc/ld.so.conf
+
+include ld.so.conf.d/*.conf
+/usr/local/lib
+/usr/lib
+
+Finally save and quit :wq!
+
+ldconfig
+
+Now, check with same command,
+
+
+# ffmpeg -v
+ffmpeg version N-73873-gcee7acf-syslin Copyright (c) 2000-2015 the FFmpeg developers
+  built with gcc 4.4.7 (GCC) 20120313 (Red Hat 4.4.7-11)
+  configuration: --enable-shared --enable-nonfree --enable-gpl --enable-pthreads --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libfaac --enable-libmp3lame --enable-libtheora --enable-libvorbis --extra-libs=-lx264 --enable-libxvid --extra-cflags=-I/usr/local/cpffmpeg/include/ --extra-ldflags=-L/usr/local/cpffmpeg/lib --enable-version3 --extra-version=syslin --enable-libass --enable-libvpx --enable-zlib --enable-gpl
+  libavutil      54. 28.100 / 54. 28.100
+  libavcodec     56. 50.101 / 56. 50.101
+  libavformat    56. 40.101 / 56. 40.101
+  libavdevice    56.  4.100 / 56.  4.100
+  libavfilter     5. 25.100 /  5. 25.100
+  libswscale      3.  1.101 /  3.  1.101
+  libswresample   1.  2.101 /  1.  2.101
+  libpostproc    53.  3.100 / 53.  3.100

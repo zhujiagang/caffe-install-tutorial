@@ -1,0 +1,7 @@
+xauth add localhost/unix:10 MIT-MAGIC-COOKIE-1 27e035688dd89483c6fe48b2470172f5
+          `````````      `` 
+The last hex-number is 32 characters long. You can create your own (quite) random number on the Linux shell with one of these commands:
+
+mcookie
+
+sudo gedit /home/user/opencv2.4/OpenCV/opencv-2.4.10/modules/imgproc/src/imgwarp.cpp

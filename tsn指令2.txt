@@ -1,0 +1,137 @@
+python tools/eval_net.py ucf101 1 rgb FRAME_PATH models/ucf101/tsn_bn_inception_rgb_deploy.prototxt models/ucf101_split_1_tsn_rgb_reference_bn_inception.caffemodel --num_worker 4 --save_scores SCORE_FILE
+
+cp Makefile.config /home/zjg/tsncaffe/temporal-segment-networks/lib/caffe-action 
+cp mynote.sh 
+
+bash scripts/extract_optical_flow.sh /home/zjg/tsncaffe/UCF-101/ /home/zjg/tsncaffe/UCF-101-result/ 1 tvl1
+
+bash scripts/extract_optical_flow.sh /home/zjg/tsncaffe/UCF-101/ /home/zjg/tsncaffe/UCF-101-result-warped/ 1 warp_tvl1
+
+
+bash scripts/extract_optical_flow.sh /home/zjg/tsncaffe/videos/ /home/zjg/tsncaffe/videos-result/ 1 tvl1
+
+bash scripts/extract_optical_flow.sh /home/zjg/tsncaffe/videos/ /home/zjg/tsncaffe/videos-result-warped/ 1 warp_tvl1
+
+bash scripts/extract_optical_flow.sh /home/zjg/tsncaffe/lin/ /home/zjg/tsncaffe/lin-flow/ 1 tvl1
+
+bash scripts/extract_optical_flow.sh /home/zjg/tsncaffe/lin/ /home/zjg/tsncaffe/lin-flow-warp/ 1 warp_tvl1
+
+############ucf101 split1
+
+python tools/eval_net.py ucf101 1 rgb /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_rgb_deploy.prototxt models/ucf101_split_1_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_1_tsn_rgb_score.npz
+
+python tools/eval_net.py ucf101 1 rgb /home/zjg/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_rgb_deploy.prototxt models/ucf101_split1_tsn_rgb_bn_inception_iter_5500.caffemodel --num_worker 1
+
+python tools/eval_net.py ucf101 1 flow /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_flow_deploy.prototxt models/ucf101_split_1_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_1_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_1_tsn_rgb_score.npz /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score.npz --score_weights 1 1.5
+
+############ucf101 split2
+
+python tools/eval_net.py ucf101 2 rgb /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_rgb_deploy.prototxt models/ucf101_split_2_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_2_tsn_rgb_score.npz
+
+python tools/eval_net.py ucf101 2 flow /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_flow_deploy.prototxt models/ucf101_split_2_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_2_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_2_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_2_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_2_tsn_rgb_score.npz /home/zjg/tsncaffe/score/ucf101_split_2_tsn_flow_score.npz --score_weights 1 1.5
+
+############ucf101 split3
+
+python tools/eval_net.py ucf101 3 rgb /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_rgb_deploy.prototxt models/ucf101_split_3_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_3_tsn_rgb_score.npz
+
+python tools/eval_net.py ucf101 3 flow /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_flow_deploy.prototxt models/ucf101_split_3_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_3_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_3_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_3_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_3_tsn_rgb_score.npz /home/zjg/tsncaffe/score/ucf101_split_3_tsn_flow_score.npz --score_weights 1 1.5
+
+
+
+
+############hmdb51 split1
+
+python tools/eval_net.py hmdb51 1 rgb /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_rgb_deploy.prototxt models/hmdb51_split_1_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_rgb_score.npz
+
+python tools/eval_net.py hmdb51 1 flow /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_flow_deploy.prototxt models/hmdb51_split_1_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_rgb_score.npz /home/zjg/tsncaffe/score/hmdb51_split_1_tsn_flow_score.npz --score_weights 1 1.5
+
+############hmdb51 split2
+
+python tools/eval_net.py hmdb51 2 rgb /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_rgb_deploy.prototxt models/hmdb51_split_2_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_rgb_score.npz
+
+python tools/eval_net.py hmdb51 2 flow /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_flow_deploy.prototxt models/hmdb51_split_2_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_rgb_score.npz /home/zjg/tsncaffe/score/hmdb51_split_2_tsn_flow_score.npz --score_weights 1 1.5
+
+############hmdb51 split3
+
+python tools/eval_net.py hmdb51 3 rgb /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_rgb_deploy.prototxt models/hmdb51_split_3_tsn_rgb_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_rgb_score.npz
+
+python tools/eval_net.py hmdb51 3 flow /home/zjg/tsncaffe/videos-result/ models/hmdb51/tsn_bn_inception_flow_deploy.prototxt models/hmdb51_split_3_tsn_flow_reference_bn_inception.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_flow_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_rgb_score.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_rgb_score.npz /home/zjg/tsncaffe/score/hmdb51_split_3_tsn_flow_score.npz --score_weights 1 1.5
+
+
+
+bash scripts/build_file_list.sh ucf101 /home/zjg/tsncaffe/UCF-101-result-warped/
+
+bash scripts/build_file_list.sh ucf101 /home/zjg/tsncaffe/UCF-101-result/
+
+bash scripts/build_file_list.sh hmdb51 /home/zjg/tsncaffe/videos-result/
+
+
+
+openmpi
+
+cmake .. -DUSE_MPI=ON -DMPI_CXX_COMPILER="/usr/local/openmpi/bin/mpicxx"
+
+
+
+python tools/eval_net.py ucf101 1 rgb /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_rgb_deploy.prototxt models/ucf101_split1_tsn_rgb_bn_inception_iter_3500.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_1_tsn_rgb_score_3500.npz
+
+python tools/eval_net.py ucf101 1 flow /home/zjg/tsncaffe/UCF-101-result/ models/ucf101/tsn_bn_inception_flow_deploy.prototxt models/ucf101_split1_tsn_flow_bn_inception_iter_18000.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score_18000.npz
+
+python tools/eval_net.py ucf101 1 flow /home/zjg/tsncaffe/UCF-101-result-warped/ models/ucf101/tsn_bn_inception_flow_deploy.prototxt models/ucf101_split1_tsn_flow_bn_inception_iter_18000.caffemodel --num_worker 1 --save_scores /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score_18000_warp.npz
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_1_tsn_rgb_score_3500.npz /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score_18000.npz --score_weights 1 1.5
+
+python tools/eval_scores.py /home/zjg/tsncaffe/score/ucf101_split_1_tsn_rgb_score_3500.npz /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score_18000.npz /home/zjg/tsncaffe/score/ucf101_split_1_tsn_flow_score_18000_warp.npz --score_weights 1 1.1 0.5
+
+
+ nm libopencv_gpu.so | grep convertTo*
+
+ === linking: release/DenseTrackStab ===
+g++ -L/opt/lib -pipe -Wall -O3 -ggdb -lncurses -o release/DenseTrackStab .build_release/DenseTrackStab.o -lopencv_core -lopencv_highgui -lopencv_video -lopencv_imgproc -lopencv_calib3d -lopencv_features2d -lopencv_nonfree -lavformat -lavdevice -lavutil -lavcodec -lswscale
+//usr/local/lib/libopencv_gpu.so.2.4: undefined reference to `cv::gpu::convertTo(cv::gpu::GpuMat const&, cv::gpu::GpuMat&, double, double, CUstream_st*)'
+//usr/local/lib/libopencv_gpu.so.2.4: undefined reference to `cv::gpu::setTo(cv::gpu::GpuMat&, cv::Scalar_<double>, cv::gpu::GpuMat const&, CUstream_st*)'
+//usr/local/lib/libopencv_gpu.so.2.4: undefined reference to `cv::gpu::setTo(cv::gpu::GpuMat&, cv::Scalar_<double>, CUstream_st*)'
+
+
+把 /usr/local/lib/ 下的 libopencv_gpu.so.2.4 和 libopencv_gpu.so.2.4.10 删除，只剩下libopencv_gpu.so 问题解决
+I encountered the same problem. I just delete libopencv_gpu.so.2.4 and libopencv_gpu.so.2.4.10 in /usr/local/lib/. It's solved.
+
+训练指令
+bash scripts/train_tsn.sh ucf101 rgb
+bash scripts/train_tsn.sh ucf101 flow
