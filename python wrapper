@@ -1,0 +1,8 @@
+caffe python接口实现多GPU训练
+需要安装 NCCL
+https://github.com/NVIDIA/nccl
+
+To install, run make PREFIX=<install dir> install and add <instal dir>/lib to your LD_LIBRARY_PATH.
+exp: 
+make PREFIX=/usr/local/nccl install
+NCCLPATH=/usr/local/nccl/lib:$NCCLPATH
