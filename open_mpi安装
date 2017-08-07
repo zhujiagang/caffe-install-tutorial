@@ -1,25 +1,21 @@
 1.确认以下编译器已安装：
 
 gcc –version
-
 g++ –version
-
 Python –version
 
 建议去官方网站下载最新版本：http://www.open-mpi.org
 2.下载（默认至当前用户的Downloads目录下）
 
 URL: http://www.open-mpi.org/software/ompi/v1.6/
-
 目前版本：openmpi-1.6.5.tar.gz
 
 3.解压openMPI安装文件，放在当前用户目录下：
-
 tar zxvf openmpi-1.6.5.tar.gz
 
 4.进入安装文件目录
 
-cd openmpi-1.7.5
+cd openmpi-1.6.5
 
 5.安装openMPI 
 
@@ -34,16 +30,12 @@ sudo make all install
 
 7.添加库共享路径：
 
-
 gedit ~/.bashrc
-
-
 
 export PATH=/usr/local/cuda-8.0/bin:/usr/local/openmpi/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/home/user/cudnnv4/lib64:/home/user/cudnnv5/lib64:/usr/local/openmpi:$LD_LIBRARY_PATH
 8.使该配置文件生效：
 source ~/.bashrc
-
 
 9.进行测试：
 
