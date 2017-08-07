@@ -19,7 +19,7 @@ cd openmpi-1.6.5
 
 5.安装openMPI 
 
-./configure --prefix="/usr/local/openmpi"
+./configure --prefix="/usr/local/openmpi"  --enable-thread-multiple
 
 注意最后一行是将其安装到 /usr/local/openmpi目录下，可以指定为其他目录，如，用户目录下。
 
