@@ -32,8 +32,8 @@ sudo make all install
 
 gedit ~/.bashrc
 
-export PATH=/usr/local/cuda-8.0/bin:/usr/local/openmpi/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:/home/user/cudnnv4/lib64:/home/user/cudnnv5/lib64:/usr/local/openmpi:$LD_LIBRARY_PATH
+export PATH=/usr/local/openmpi/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH
 8.使该配置文件生效：
 source ~/.bashrc
 
