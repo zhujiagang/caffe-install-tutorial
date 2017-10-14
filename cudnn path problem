@@ -1,0 +1,36 @@
+1 
+
+如果系统路径下没有添加cudnn.h和.so文件（最好是这样），在caffe/Makefile.config里面加入自己的cudnn路径即可，如
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /home/user/cudnnv5/include
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /home/user/cudnnv5/lib64
+
+2
+
+如果系统路径下有cudnn.h和.so文件，你自己也没有权限删除，如果你这样直接用cudnn可能会报错，如果报错了，方法一是替换新版本caffe的层，但是太麻烦，
+方法二是用自己的cudnn，用caffe python接口的话和1一样
+在caffe/Makefile.config里面加入自己的cudnn路径即可，如
+INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /home/user/cudnnv5/include
+LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /home/user/cudnnv5/lib64
+
+用cmake编译的话，就需要去caffe/cmake/Cuda.cmake文件进行修改，改成这样
+
+# cudnn detection
+if(USE_CUDNN)
+  detect_cuDNN()
+  if(HAVE_CUDNN)
+    add_definitions(-DUSE_CUDNN)
+    #include_directories(SYSTEM ${CUDNN_INCLUDE})这是注释掉的行，
+    include_directories(${CUDNN_INCLUDE})#       把cudnn的搜索路径中的系统路径删除，只剩下自己配置的本地cudnn路径
+    list(APPEND Caffe_LINKER_LIBS ${CUDNN_LIBRARY})
+  endif()
+endif()
+
+最后的编译指令是
+make clean
+mkdir build
+cd build
+cmake .. -DUSE_CUDNN=ON -DCUDNN_INCLUDE="/data1/zhuzheng/zjg_code/code1012/cudnnv5/include" -DCUDNN_LIBRARY="/data1/zhuzheng/zjg_code/code1012/cudnnv5/lib64/libcudnn.so" -DCUDNN_ROOT="/data1/zhuzheng/zjg_code/code1012/cudnnv5"
+make -j128 install
+
+其中-DCUDNN_LIBRARY="/data1/zhuzheng/zjg_code/code1012/cudnnv5/lib64/libcudnn.so" .so需要直接加上，不能写成
+-DCUDNN_LIBRARY="/data1/zhuzheng/zjg_code/code1012/cudnnv5/lib64" 否则也会报错
