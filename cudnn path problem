@@ -34,3 +34,11 @@ make -j128 install
 
 其中-DCUDNN_LIBRARY="/data1/zhuzheng/zjg_code/code1012/cudnnv5/lib64/libcudnn.so" .so需要直接加上，不能写成
 -DCUDNN_LIBRARY="/data1/zhuzheng/zjg_code/code1012/cudnnv5/lib64" 否则也会报错
+
+../lib/libcaffe.so: undefined reference to `cudnnBatchNormalizationForwardTraining'
+../lib/libcaffe.so: undefined reference to `cudnnCreate'
+collect2: error: ld returned 1 exit status
+make[2]: *** [tools/caffe] Error 1
+make[1]: *** [tools/CMakeFiles/caffe.bin.dir/all] Error 2
+make: *** [all] Error 2
+
